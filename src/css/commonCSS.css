@@ -1,0 +1,33 @@
+.transition-btn {
+    transition: .3s ease;
+}
+
+.main-btn {
+    background-color: #5e3ad4;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    transition: .2s ease-in-out;
+}
+
+.main-btn:hover {
+    background-color: #fff;
+    color: #5e3ad4;
+    border-color: #5e3ad4;
+}
+
+.second-btn {
+    background-color: #d47d3a;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    transition: .2s ease-in-out;
+}
+
+.second-btn:hover {
+    background-color: #fff;
+    color: #d47d3a;
+    border-color: #d47d3a;
+}

@@ -1,0 +1,16 @@
+.profile-input {
+    border-radius: 15px;
+    border: 1px solid #000;
+    outline: none;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+.profile-box {
+    display: flex;
+    width: 40%;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 10px 5px;
+    justify-content: center;
+}

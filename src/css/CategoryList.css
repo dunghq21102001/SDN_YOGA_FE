@@ -1,0 +1,37 @@
+.parent {
+    width: 80%;
+    border-top: 3px solid #5e3ad4;
+    border-bottom: 3px solid #5e3ad4;
+    margin: 20px auto;
+    text-align: center;
+    height: auto;
+}
+
+.parent:not(:hover) .child {
+    font-size: 0;
+    margin: 0;
+    opacity: 0;
+    padding: 0;
+    /* fade out, then shrink */
+    transition: opacity .25s,
+        font-size .5s .25s,
+        margin .5s .25s,
+        padding .5s .25s;
+}
+
+.child {
+    margin: .5em 1em;
+    padding: 1em;
+}
+
+.child button {
+    margin: 20px 0 0 0;
+}
+
+.parent:hover .child {
+    /* unshrink, then fade in */
+    transition: font-size .25s,
+        margin .25s,
+        padding .25s,
+        opacity .5s .25s;
+}

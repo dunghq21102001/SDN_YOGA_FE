@@ -1,0 +1,50 @@
+.background-custom-about {
+    background-image: url('../assets//yoga-room.jpg');
+}
+
+.background-custom-about2 {
+    background-image: url('../assets/yoga-room2.jpg');
+}
+
+.fixed-bg-about {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.fixed-bg-about2 {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    transform: translateX(100%);
+}
+
+.scroll-bg-about {
+    background-color: #0f0f0a;
+    padding: 10px 20px;
+    color: #676767;
+    position: absolute;
+    width: 50%;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.scroll-bg-about2 {
+    background-color: #0f0f0a;
+    padding: 10px 20px;
+    color: #676767;
+    position: absolute;
+    width: 50%;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
