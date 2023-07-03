@@ -2,6 +2,10 @@
     transition: .3s ease;
 }
 
+.admin-wf {
+    width: calc(100% - 200px);
+}
+
 .main-btn {
     background-color: #5e3ad4;
     color: #fff;
@@ -30,4 +34,49 @@
     background-color: #fff;
     color: #d47d3a;
     border-color: #d47d3a;
+}
+
+
+.edit-btn {
+    background-color: #40b42b;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    transition: .2s ease-in-out;
+}
+
+.edit-btn:hover {
+    background-color: #fff;
+    color: #40b42b;
+    border-color: #40b42b;
+}
+
+.delete-btn {
+    background-color: #ab2828;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    transition: .2s ease-in-out;
+}
+
+.delete-btn:hover {
+    background-color: #fff;
+    color: #ab2828;
+    border-color: #ab2828;
+}
+
+.input-cus {
+    border: none;
+    outline: none;
+    background-color: #ececec;
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+
+.select-cus {
+    background-color: #ececec;
+    padding: 10px 20px;
+    border-radius: 10px;
 }

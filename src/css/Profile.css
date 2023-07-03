@@ -8,7 +8,7 @@
 
 .profile-box {
     display: flex;
-    width: 40%;
+    width: 90%;
     align-items: flex-start;
     flex-direction: column;
     margin: 10px 5px;

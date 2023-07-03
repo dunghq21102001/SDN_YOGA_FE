@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 class swal2 {
-    static success(message, time = 2000) {
+    static success(message, time = 1500) {
         Swal.fire({
             toast: true,
             showConfirmButton: false,
@@ -16,7 +16,7 @@ class swal2 {
             }
         })
     }
-    static error(message, time = 2500) {
+    static error(message, time = 2000) {
         Swal.fire({
             toast: true,
             showConfirmButton: false,

@@ -13,41 +13,54 @@ import Register from './pages/Register'
 import { useSelector } from 'react-redux'
 import Profile from './pages/Profile'
 import DetailProduct from './pages/DetailProduct'
+import Admin from './pages/Admin'
+import Contact from './pages/Contact'
 function App() {
   const user = useSelector((state) => state.auth)
   const ProtectedRoute = ({ children }) => {
-    if (user.auth) {
-      return <Navigate to={'/'} />
-    }
+    if (user.auth && user.auth.role !== 'admin') return <Navigate to={'/'} />
+    else if (user.auth && user.auth.role === 'admin') return <Navigate to={'/admin'} />
     return children
   }
   const CheckAuth = ({ children }) => {
-    if (!user.auth) {
-      return <Navigate to={'/login'} />
-    }
+    if (!user.auth) return <Navigate to={'/login'} />
+    return children
+  }
+
+  const CheckAdminLogged = ({ children }) => {
+    if (user.auth && user.auth.role == 'admin') return <Navigate to={'/admin'} />
+    return children
+  }
+
+  const CheckPermission = ({ children }) => {
+    if (!user.auth || user.auth.role != 'admin') return <Navigate to={'/'} />
     return children
   }
 
   return (
     <>
-      <SideBar />
+      {user.auth?.role !== 'admin' ? <SideBar /> : ''}
       <main className='w-full min-h-[100vh]'>
         <ScrollToTop />
-        <Header />
+        {user.auth?.role !== 'admin' ? <Header /> : ''}
         <Routes>
-          <Route path='/' element={<Home />} />
+          <Route path='/' element={<CheckAdminLogged><Home /></CheckAdminLogged>} />
           <Route path='/about' element={<About />} />
           <Route path='/profile' element={
             <CheckAuth> <Profile /> </CheckAuth>
           } />
+          <Route path='/admin/*' element={
+            <CheckPermission> <Admin /> </CheckPermission>
+          } />
           <Route path='/products' element={<Product />} />
           <Route path='/product/:id' element={<DetailProduct />} />
+          <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={
             <ProtectedRoute> <Login /> </ProtectedRoute>
           } />
           <Route path='/register' element={<Register />} />
         </Routes>
-        <Footer />
+        {user.auth?.role !== 'admin' ? <Footer /> : ''}
       </main>
     </>
   )

@@ -20,9 +20,12 @@ function Login() {
       .then(res => {
         if (res.data.message == 'Đăng nhập thành công') {
           swal2.success('Login successful')
-          sessionStorage.setItem('user', JSON.stringify(res.data.data))
+          localStorage.setItem('user', JSON.stringify(res.data.data))
           dispatch(authen(res.data.data))
-          navigate('/')
+          if (res.data.data.role != 'admin') return navigate('/')
+          else return navigate('/admin')
+        } else {
+          swal2.error(res.data.message, 3500)
         }
       })
       .catch(err => swal2.error(err, 3000))

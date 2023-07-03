@@ -1,6 +1,55 @@
-import { Link } from "react-router-dom"
-
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"
+import swal2 from '../commonFunction/swal2'
+import API from '../API'
 function Register() {
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordAgain, setPasswordAgain] = useState('');
+  const nagitive = useNavigate()
+  const validateForm = () => {
+    if (userName.trim() === '') {
+      swal2.error('Please enter username');
+      return false;
+    }
+
+    if (password.trim() === '') {
+      swal2.error('Please enter password');
+      return false;
+    }
+
+    if (password.length < 6 || password.length > 255) {
+      swal2.error('Password must be between 6 and 255 characters in length');
+      return false;
+    }
+
+    if (passwordAgain.trim() === '') {
+      swal2.error('Please enter password again');
+      return false;
+    }
+
+    if (password !== passwordAgain) {
+      swal2.error('Passwords do not match');
+      return false;
+    }
+    return true;
+  };
+
+  const register = () => {
+    if (validateForm()) {
+      const data = { userName, password, image: 'https://i.stack.imgur.com/l60Hf.png', role: 'user', createdDate: new Date().toLocaleString(), fullName: 'none', email: 'none' }
+      API.register(data)
+        .then(res => {
+          if (res.data?.error) {
+            return swal2.error(res.data.error)
+          } else {
+            swal2.success('Register successful, login to continue', 5000)
+            nagitive('/login')
+          }
+        })
+        .catch(err => swal2.error(err))
+    }
+  }
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12 mt-12">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto">
@@ -18,19 +67,19 @@ function Register() {
             <div className="divide-y divide-gray-200">
               <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                 <div className="relative">
-                  <input id="email" name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Username" />
+                  <input id="email" value={userName} onChange={(event) => setUserName(event.target.value)} name="email" type="text" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Username" />
                   <label htmlFor="email" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Username</label>
                 </div>
                 <div className="relative">
-                  <input id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
+                  <input value={password} onChange={(event) => setPassword(event.target.value)} id="password" name="password" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
                   <label htmlFor="password" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password</label>
                 </div>
                 <div className="relative">
-                  <input id="password2" name="password2" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
+                  <input value={passwordAgain} onChange={(event) => setPasswordAgain(event.target.value)} id="password2" name="password2" type="password" className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600" placeholder="Password" />
                   <label htmlFor="password2" className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm">Password Again</label>
                 </div>
                 <div className="relative">
-                  <button className="main-btn">Register</button>
+                  <button onClick={register} className="main-btn">Register</button>
                 </div>
                 <div className="text-gray-400">
                   Have account? <span className="text-red-500 cursor-pointer"><Link to='/login'>Login now</Link></span>

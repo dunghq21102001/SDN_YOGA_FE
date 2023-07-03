@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import API from "../API"
 import func from '../commonFunction/func'
+import '../css/Product.css'
 import { Link } from "react-router-dom"
 function Product() {
   const [list, setList] = useState([])
@@ -20,11 +21,13 @@ function Product() {
       </div>
       <div className="w-[80%] mx-auto flex justify-around items-center flex-wrap my-20">
         {list.map(pro => (
-          <div className=" sm:w-[300px] md:w-[200px] mx-3 my-2 overflow-hidden" key={pro._id}>
-            <Link to={`/product/${pro._id}`}>
-              <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-720w,f_auto,q_auto:best/newscms/2023_18/1658168/purples-lavenders-balancefrom-gym-mats-bfgy-ap6pp-64-600-5ff5ceef561d6.jpg" className="w-[90%] mx-auto cursor-pointer hover:scale-105 transition-all" alt="" />
-            </Link>
-            <span>{pro.name}</span><br />
+          <div className=" sm:w-[500px] md:w-[300px] mx-3 my-2 overflow-hidden" key={pro._id}>
+            <div className="w-full h-[200px] overflow-hidden">
+              <Link to={`/product/${pro._id}`}>
+                <img src={pro.images[0]} className="w-[90%] mx-auto cursor-pointer hover:scale-105 transition-all" alt="not found" />
+              </Link>
+            </div>
+            <h5 className="trundicate" title={pro.name}><Link to={`/product/${pro._id}`}>{pro.name}</Link></h5><br />
             <div className="w-full flex items-center justify-around">
               <span className="text-red-500">{func.convertVND(pro.price)}</span>
               <del className="text-gray-400">{func.convertVND(pro.price * 1.5)}</del>

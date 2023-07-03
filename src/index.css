@@ -11,3 +11,13 @@
 a {
   text-decoration: none;
 }
+
+::-webkit-scrollbar {
+  width: 15px;
+  height: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #927bdc; 
+}
