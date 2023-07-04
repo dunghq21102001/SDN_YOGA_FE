@@ -5,6 +5,7 @@ import API from '../../API'
 import swal2 from '../../commonFunction/swal2'
 import { BsSearch } from 'react-icons/bs'
 import { useSelector } from 'react-redux'
+import func from '../../commonFunction/func'
 function User() {
   const user = useSelector((state) => state.auth)
   const [list, setList] = useState([])
@@ -23,6 +24,11 @@ function User() {
   const [classesTaught, setClassesTaught] = useState([]);
   const [cart, setCart] = useState(null);
   const [search, setSearch] = useState('')
+  const [isShowPut, setIsShowPut] = useState(false)
+  const [selectUser, setSelectUser] = useState(null)
+  const [selectIdUser, setSelectIdUser] = useState(null)
+  const [selectRoleUser, setSelectRoleUser] = useState(null)
+  const [choosedClassName, setChoosedClassName] = useState('')
 
   useEffect(() => {
     fetchUser()
@@ -87,8 +93,12 @@ function User() {
 
   const cancelAll = () => {
     setIsCreate(false)
+    setIsShowPut(false)
     setIsShow(false)
     setIsUpdate(false)
+    setChoosedClassName(null)
+    setSelectIdUser('')
+    setSelectRoleUser('')
     setId('')
     setUserName('')
     setFullName('');
@@ -208,6 +218,49 @@ function User() {
         .catch(err => swal2.error(err))
     }
   }
+  const putOut = (id, role) => {
+    setIsShowPut(true)
+    setSelectIdUser(id)
+    setSelectRoleUser(role)
+    API.getListClassOfAUser(id)
+      .then(res => {
+        if (role == 'pt') {
+          setSelectUser(res.data.taughtClasses)
+          setChoosedClassName(res.data.taughtClasses[0])
+        } else {
+          setSelectUser(res.data.joinedClasses)
+          setChoosedClassName(res.data.joinedClasses[0])
+        }
+      })
+      .catch(err => swal2.error(err))
+
+  }
+
+  const onChangeSelectedClass = (e) => {
+    const tmp = selectUser.find(i => i._id == e.target.value)
+    setChoosedClassName(tmp)
+  }
+
+  const actionPutOut = () => {
+    if (choosedClassName == '' || choosedClassName == undefined) return swal2.error('This user is not join any classes')
+    if (selectRoleUser == 'pt') {
+      API.deletePTToClass(choosedClassName._id, selectIdUser)
+        .then(res => {
+          swal2.success('remove from a class successful')
+          cancelAll()
+          fetchUser()
+        })
+        .catch(err => swal2.error(err))
+    } else if (selectRoleUser == 'user') {
+      API.deleteUserToClass(choosedClassName._id, selectIdUser)
+        .then(res => {
+          swal2.success('remove from a class successful')
+          cancelAll()
+          fetchUser()
+        })
+        .catch(err => swal2.error(err))
+    } else return
+  }
   return (
     <div className="w-full">
       <div className='flex my-5 justify-around'>
@@ -233,7 +286,7 @@ function User() {
               <th><div className='w-[200px]'>Email</div></th>
               <th><div className='w-[370px]'>Address</div></th>
               <th><div className='w-[160px]'>Phone</div></th>
-              <th><div className='w-[200px]'>Action</div></th>
+              <th><div className='w-[290px]'>Action</div></th>
             </tr>
           </thead>
           <tbody>
@@ -246,9 +299,10 @@ function User() {
                 <td><div className='ml-3'>{i.address}</div></td>
                 <td><div className='text-center'>{i.phone}</div></td>
                 <td>
-                  <div className='flex items-center justify-around my-2'>
+                  <div className='flex items-center justify-start my-2'>
                     <button className='edit-btn' onClick={() => showEdit(i._id)}>Edit</button>
                     <button className='delete-btn' onClick={() => deleteUser(i._id)}>Delete</button>
+                    {i.role == 'admin' ? '' : <button className='second-btn' onClick={() => putOut(i._id, i.role)}>Put out class</button>}
                   </div>
                 </td>
               </tr>
@@ -256,6 +310,29 @@ function User() {
           </tbody>
         </table>
       </div>
+
+      {isShowPut
+        ? <div className='fog' onClick={handleParentClick}>
+          <div className='w-[60%] lg:w-[40%] bg-white flex flex-col justify-center' onClick={handleChildClick}>
+            <select className='select-cus' onChange={onChangeSelectedClass} name="" id="">
+              {selectUser?.map(classItem => (
+                <option key={classItem?._id} value={classItem?._id}>
+                  {classItem?.name}
+                </option>
+              ))}
+            </select>
+            <div className='w-full my-4'>
+              <p>You are choosing class: {choosedClassName?.name}</p><br />
+              <p>Cost: {func.convertVND(choosedClassName?.cost)}</p><br />
+              <p>Start Date: {choosedClassName?.startedDate} | End Date: {choosedClassName?.endDate}</p>
+
+            </div>
+            <div className='w-[60%] mx-auto flex justify-around my-4'>
+              <button className='' onClick={cancelAll}>Cancel</button>
+              <button className='main-btn' onClick={() => actionPutOut()}>Put out</button>
+            </div>
+          </div>
+        </div> : ''}
 
       {isShow
         ? <div className='fog' onClick={handleParentClick}>

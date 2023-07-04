@@ -5,6 +5,7 @@ import API from '../../API'
 import swal2 from '../../commonFunction/swal2'
 import { BsSearch } from 'react-icons/bs'
 import commonFunction from '../../commonFunction/func'
+import func from '../../commonFunction/func'
 function AdminClass() {
   const [list, setList] = useState([])
   const [cateList, setCateList] = useState([])
@@ -204,17 +205,19 @@ function AdminClass() {
   }
 
   const updateClass = (e) => {
-    const aClass = {
-      name, cost, description, numberSession, startedDate: startDate, endDate: endDate, note, classcategories: classcategories
+    if (validateForm()) {
+      const aClass = {
+        name, cost, description, numberSession, startedDate: startDate, endDate: endDate, note, classcategories: classcategories
+      }
+      e.preventDefault()
+      API.updateClass(id, aClass)
+        .then(res => {
+          swal2.success('update class successful')
+          fetchClass()
+          cancelAll()
+        })
+        .catch(err => swal2.error(err))
     }
-    e.preventDefault()
-    API.updateClass(id, aClass)
-      .then(res => {
-        swal2.success('update class successful')
-        fetchClass()
-        cancelAll()
-      })
-      .catch(err => swal2.error(err))
   }
 
 
@@ -261,7 +264,7 @@ function AdminClass() {
         <button onClick={showCreate} className='main-btn'>Create</button>
       </div>
 
-
+    
       <div className={` w-[80%] mx-auto overflow-x-scroll`}>
         <table >
           <thead>
@@ -285,8 +288,8 @@ function AdminClass() {
                 <td><div className='ml-3'>{commonFunction.convertVND(i.cost)}</div></td>
                 <td><div className='ml-3'>{i.description}</div></td>
                 <td><div className='ml-3'>{i.numberSession}</div></td>
-                <td><div className='ml-3'>{i.startedDate}</div></td>
-                <td><div className='ml-3'>{i.endDate}</div></td>
+                <td><div className='ml-3'>{func.convertDate(i.startedDate)}</div></td>
+                <td><div className='ml-3'>{func.convertDate(i.endDate)}</div></td>
                 <td><div className='ml-3 flex justify-center'>
                   <select className='select-cus' name="" id="">
                     {i.ptIds.map(pt => (
@@ -295,12 +298,12 @@ function AdminClass() {
                   </select>
                 </div></td>
                 <td><div className='ml-3 flex justify-center'>
-                <select className='select-cus' name="" id="">
+                  <select className='select-cus' name="" id="">
                     {i.userIds.map(pt => (
                       <option key={pt._id}>{pt.fullName}</option>
                     ))}
                   </select>
-                  </div></td>
+                </div></td>
                 <td><div className='ml-3'>{i.note}</div></td>
                 <td>
                   <div className='flex items-center justify-around my-2'>

@@ -51,10 +51,10 @@ export default class API {
       return axios.post(`${this.API_URL_V1}/classes/${classId}/user/${userId}`)
    }
    static deletePTToClass(classId, PTId) {
-      return axios.delete(`${this.API_URL_V1}/classes/${classId}/pt/${PTId}`)
+      return axios.delete(`${this.API_URL_V1}/classes/classes/${classId}/pt/${PTId}`)
    }
    static deleteUserToClass(classId, userId) {
-      return axios.delete(`${this.API_URL_V1}/classes/${classId}/user/${userId}`)
+      return axios.delete(`${this.API_URL_V1}/classes/classes/${classId}/user/${userId}`)
    }
    static getListRequest() {
       return axios.get(`${this.API_URL_V1}/classes/requests`)
