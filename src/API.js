@@ -20,6 +20,9 @@ export default class API {
    static getListClass() {
       return axios.get(`${this.API_URL_V1}/classes`)
    }
+   static getListClassCanRegister() {
+      return axios.get(`${this.API_URL_V1}/classes/can-register`)
+   }
    static getAClass(id) {
       return axios.get(`${this.API_URL_V1}/classes/${id}`)
    }
@@ -34,6 +37,36 @@ export default class API {
    }
    static sortClass(type) {
       return axios.get(`${this.API_URL_V1}/classes/sort/${type}`)
+   }
+   static getTopClasses() {
+      return axios.get(`${this.API_URL_V1}/classes/top-6-classes`)
+   }
+   static getClassByCate(name) {
+      return axios.get(`${this.API_URL_V1}/classes/classes-by-category?categoryName=${name}`)
+   }
+   static addPTToClass(classId, PTId) {
+      return axios.post(`${this.API_URL_V1}/classes/${classId}/pt/${PTId}`)
+   }
+   static addUserToClass(classId, userId) {
+      return axios.post(`${this.API_URL_V1}/classes/${classId}/user/${userId}`)
+   }
+   static deletePTToClass(classId, PTId) {
+      return axios.delete(`${this.API_URL_V1}/classes/${classId}/pt/${PTId}`)
+   }
+   static deleteUserToClass(classId, userId) {
+      return axios.delete(`${this.API_URL_V1}/classes/${classId}/user/${userId}`)
+   }
+   static getListRequest() {
+      return axios.get(`${this.API_URL_V1}/classes/requests`)
+   }
+   static createRequest(data) {
+      return axios.post(`${this.API_URL_V1}/classes/requests`, data)
+   }
+   static deleteRequest(id) {
+      return axios.delete(`${this.API_URL_V1}/classes/requests/${id}`)
+   }
+   static getListClassOfAUser(id) {
+      return axios.get(`${this.API_URL_V1}/classes/user/${id}/classes`)
    }
 
    //category class

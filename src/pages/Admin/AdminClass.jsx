@@ -272,6 +272,8 @@ function AdminClass() {
               <th><div className='w-[160px]'>Number Session</div></th>
               <th><div className='w-[160px]'>Start Date</div></th>
               <th><div className='w-[160px]'>End Date</div></th>
+              <th><div className='w-[260px]'>PTs</div></th>
+              <th><div className='w-[260px]'>Trainees</div></th>
               <th><div className='w-[300px]'>Note</div></th>
               <th><div className='w-[200px]'>Action</div></th>
             </tr>
@@ -285,6 +287,20 @@ function AdminClass() {
                 <td><div className='ml-3'>{i.numberSession}</div></td>
                 <td><div className='ml-3'>{i.startedDate}</div></td>
                 <td><div className='ml-3'>{i.endDate}</div></td>
+                <td><div className='ml-3 flex justify-center'>
+                  <select className='select-cus' name="" id="">
+                    {i.ptIds.map(pt => (
+                      <option key={pt._id}>{pt.fullName}</option>
+                    ))}
+                  </select>
+                </div></td>
+                <td><div className='ml-3 flex justify-center'>
+                <select className='select-cus' name="" id="">
+                    {i.userIds.map(pt => (
+                      <option key={pt._id}>{pt.fullName}</option>
+                    ))}
+                  </select>
+                  </div></td>
                 <td><div className='ml-3'>{i.note}</div></td>
                 <td>
                   <div className='flex items-center justify-around my-2'>

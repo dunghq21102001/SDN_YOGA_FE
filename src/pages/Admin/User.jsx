@@ -48,7 +48,7 @@ function User() {
       return swal2.error('User Name is required.')
     }
 
-    if (email.trim() === '') {
+    if (email ? email.trim() == '' : '') {
       isValid = false;
       return swal2.error('Email is required.');
     } else if (!emailIsValid(email)) {
@@ -56,12 +56,12 @@ function User() {
       return swal2.error('Email is invalid.');
     }
 
-    if (address.trim() === '') {
+    if (address ? address.trim() === '' : '') {
       isValid = false;
       return swal2.error('Address is required.');
     }
 
-    if (phone.trim() === '') {
+    if (phone ? phone.trim() === '' : '') {
       isValid = false;
       return swal2.error('Phone is required.');
     } else if (!phoneIsValid(phone)) {
@@ -227,8 +227,8 @@ function User() {
         <table >
           <thead>
             <tr>
-            <th><div className='w-[200px]'>User Name</div></th>
-            <th><div className='w-[200px]'>Role</div></th>
+              <th><div className='w-[200px]'>User Name</div></th>
+              <th><div className='w-[200px]'>Role</div></th>
               <th><div className='w-[200px]'>Full Name</div></th>
               <th><div className='w-[200px]'>Email</div></th>
               <th><div className='w-[370px]'>Address</div></th>

@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideBar from './components/sideBar'
+import ClassDetail from './pages/ClassDetail'
 import About from './pages/About'
 import Product from './pages/Product'
 import ScrollToTop from './components/ScrollToTop'
@@ -13,8 +14,10 @@ import Register from './pages/Register'
 import { useSelector } from 'react-redux'
 import Profile from './pages/Profile'
 import DetailProduct from './pages/DetailProduct'
+import ListClass from './pages/ClassList'
 import Admin from './pages/Admin'
 import Contact from './pages/Contact'
+import MyClass from './pages/MyClass'
 function App() {
   const user = useSelector((state) => state.auth)
   const ProtectedRoute = ({ children }) => {
@@ -49,11 +52,16 @@ function App() {
           <Route path='/profile' element={
             <CheckAuth> <Profile /> </CheckAuth>
           } />
+          <Route path='/my-class' element={
+            <CheckAuth> <MyClass /> </CheckAuth>
+          } />
           <Route path='/admin/*' element={
             <CheckPermission> <Admin /> </CheckPermission>
           } />
           <Route path='/products' element={<Product />} />
           <Route path='/product/:id' element={<DetailProduct />} />
+          <Route path='/classes' element={<ListClass />} />
+          <Route path='/classes/:id' element={<ClassDetail />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={
             <ProtectedRoute> <Login /> </ProtectedRoute>

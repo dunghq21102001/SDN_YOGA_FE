@@ -10,6 +10,7 @@ import { BsArrowsFullscreen } from 'react-icons/bs'
 import test from '../assets/defaultImage.jpg'
 import swal2 from "../commonFunction/swal2"
 import { authen } from "../reducers/userReducer"
+import AdminRequest from "./Admin/AdminRequest"
 function Admin() {
   const user = useSelector((state) => state.auth)
   const dispatch = useDispatch()
@@ -59,6 +60,7 @@ function Admin() {
           <Route path="/products-mnt" element={<CheckAuth><AdminProduct /></CheckAuth>} />
           <Route path="/classes-mnt" element={<CheckAuth><AdminClass /></CheckAuth>} />
           <Route path="/contact-mnt" element={<CheckAuth><AdminContact /></CheckAuth>} />
+          <Route path="/request-mnt" element={<CheckAuth><AdminRequest /></CheckAuth>} />
         </Routes>
       </div>
     </div>

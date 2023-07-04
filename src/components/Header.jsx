@@ -61,9 +61,9 @@ function Header() {
               </li>
             </Link>
           ))}
-          <li className="cursor-pointer hover:bg-white p-4 hover:text-[#050716] rounded-md transition-btn">
+          {/* <li className="cursor-pointer hover:bg-white p-4 hover:text-[#050716] rounded-md transition-btn">
             MemberShip
-          </li>
+          </li> */}
         </ul>
         : ''}
       {user.auth
@@ -80,7 +80,7 @@ function Header() {
                     Profile
                   </p>
                 </li>
-              <li>
+              <li onClick={() => goTo('my-class')}>
                 <p className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer dark:hover:text-white">
                   My classes
                 </p>
@@ -92,9 +92,9 @@ function Header() {
           </div>
         </div>
         : <div className="flex items-center">
-          <button className="bg-[#5e3ad4] text-white hover:text-[#050716] hover:bg-white transition-btn px-4 py-2 md:block hidden">
+          {/* <button className="bg-[#5e3ad4] text-white hover:text-[#050716] hover:bg-white transition-btn px-4 py-2 md:block hidden">
             MemberShip
-          </button>
+          </button> */}
           <Link to='login'>
             <button className="text-white flex items-center ml-4 hover:text-gray-400 mx-4">
               <FaRegUserCircle className="mr-2" /> Login

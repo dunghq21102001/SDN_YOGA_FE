@@ -1,12 +1,17 @@
 import '../css/Footer.css'
+import API from '../API'
+import swal2 from '../commonFunction/swal2'
 function Footer() {
+  const handleForm = (e) => {
+    e.preventDefault()
+  }
   return (
     <div className="w-full bg-[#5e3ad4] min-h-screen">
       <div className="w-[80%] mx-auto flex justify-around flex-col sm:flex-row">
         <div className="text-white w-full sm:w-2/5 mt-8">
           <h1 className="text-[30px]">Lets Get Moving</h1>
           <h5 className="text-[20px]">Sign Up For Updates</h5>
-          <form className="w-full relative" action="">
+          <form onClick={handleForm} className="w-full relative" action="">
             <div className="input-container">
               <input placeholder="Full Name" className="input-field" type="text" />
               <label htmlFor="input-field" className="input-label">Full Name</label>

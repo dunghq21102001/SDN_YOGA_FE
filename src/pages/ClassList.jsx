@@ -1,27 +1,27 @@
 import { useEffect, useState } from 'react'
+import API from '../API'
 import defaultImage from '../assets/defaultImage.jpg'
 import { BiGroup } from 'react-icons/bi'
 import { BsBook } from 'react-icons/bs'
-import API from '../API'
-import swal2 from '../commonFunction/swal2'
 import func from '../commonFunction/func'
+import swal2 from '../commonFunction/swal2'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 function ClassList() {
     const user = useSelector((state) => state.auth)
-    const navigate = useNavigate()
     const [list, setList] = useState([])
-
+    const navigate = useNavigate()
     useEffect(() => {
         fetchList()
     }, [])
     const fetchList = () => {
-        API.getTopClasses()
+        API.getListClassCanRegister()
             .then(res => {
                 setList(res.data)
             })
             .catch(err => swal2.error(err, 3000))
     }
+
     const becomeTrainer = (id) => {
         const data = {
             userId: user?.auth?._id,
