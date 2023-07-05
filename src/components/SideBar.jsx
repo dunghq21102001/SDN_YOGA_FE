@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom"
-
 function SideBar() {
     return (
         <div className="h-[60px] w-[430px] hidden sm:flex justify-center items-start fixed top-[50%] translate-y-[50%] left-[-172px] rotate-[-90deg] text-white text-center z-50">
@@ -14,5 +13,4 @@ function SideBar() {
         </div>
     )
 }
-
 export default SideBar

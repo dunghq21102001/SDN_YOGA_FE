@@ -1,10 +1,12 @@
 import '../css/Footer.css'
 import API from '../API'
 import swal2 from '../commonFunction/swal2'
+
 function Footer() {
   const handleForm = (e) => {
     e.preventDefault()
   }
+
   return (
     <div className="w-full bg-[#5e3ad4] min-h-screen">
       <div className="w-[80%] mx-auto flex justify-around flex-col sm:flex-row">
@@ -32,7 +34,6 @@ function Footer() {
             </button>
           </form>
         </div>
-
         <div className='mt-24 w-full sm:w-2/5 sm:mt-8'>
           <h1 className='text-white text-[20px]'>
             500 Terry Francine Street

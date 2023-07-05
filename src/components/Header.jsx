@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import test from '../assets/defaultImage.jpg'
 import { authen } from "../reducers/userReducer"
 import swal2 from "../commonFunction/swal2"
+
 function Header() {
   const user = useSelector((state) => state.auth)
   const navigate = useNavigate()
@@ -19,16 +20,13 @@ function Header() {
   function showMenu() {
     setIsShow(!isShow)
   }
-
   const goTo = (path) => {
     setIsShowProfileMenu(false)
     navigate(`/${path}`)
   }
-
   function handleShowAvatar() {
     setIsShowProfileMenu(!isShowProfileMenu)
   }
-
   function Logout() {
     dispatch(authen(null))
     swal2.success('Logout successful')
@@ -36,7 +34,6 @@ function Header() {
     localStorage.removeItem('user')
     navigate('/login')
   }
-
   return (
     <div className="w-full bg-[#050716] py-3 px-2 fixed top-0 left-0 right-0 flex justify-between items-center z-50">
       <ul className="text-white items-center w-[60%] hidden md:flex">

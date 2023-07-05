@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
     auth: JSON.parse(localStorage.getItem('user')) || null
 }
-
 const usersSlice = createSlice({
     name: 'users',
     initialState,
@@ -13,6 +12,7 @@ const usersSlice = createSlice({
         }
     }
 })
+
 
 export const { authen } = usersSlice.actions
 
