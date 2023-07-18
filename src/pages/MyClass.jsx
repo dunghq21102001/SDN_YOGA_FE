@@ -31,7 +31,8 @@ function MyClass() {
           <div className='ml-4 flex flex-col w-full'>
             <h5>Class: {i1?.name}</h5>
             <span>{func.convertVND(i1?.cost)}</span>
-            <span>Category: {i1?.classcategories?.name}</span>
+            {/* <span>Category: {i1?.classcategories?.name}</span> */}
+            <p>Description: {i1?.description}</p>
             <div className='flex items-center w-full justify-around'>
               <h5 className='flex items-center'><BiGroup className='mx-2' /> {40 - i1?.userIds.length} </h5>
               <h5 className='flex items-center'><BsBook className='mx-2' />{i1?.numberSession}</h5>
@@ -68,7 +69,8 @@ function MyClass() {
           <div className='ml-4 flex flex-col w-full'>
             <h5>Class: {i2?.name}</h5>
             <span>{func.convertVND(i2?.cost)}</span>
-            <span>Category: {i2?.classcategories?.name}</span>
+            {/* <span>Category: {i2?.classcategories?.name}</span> */}
+            <p>Description: {i2?.description}</p>
             <div className='flex items-center w-full justify-around'>
               <h5 className='flex items-center'><BiGroup className='mx-2' /> {40 - i2?.userIds.length} </h5>
               <h5 className='flex items-center'><BsBook className='mx-2' />{i2?.numberSession}</h5>

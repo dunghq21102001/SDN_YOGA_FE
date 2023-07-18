@@ -74,11 +74,11 @@ function AdminRequest() {
                     <tbody>
                         {list.map(i => (
                             <tr key={i._id}>
-                                <td><div className='ml-3'>{i.user.fullName}</div></td>
-                                <td><div className='ml-3'>{i.user.email}</div></td>
-                                <td><div className='ml-3'>{i.class.name}</div></td>
-                                <td><div className='ml-3'>{i.requestDetails}</div></td>
-                                <td><div className='ml-3 text-center'>{func.convertDate(i.createdAt)}</div></td>
+                                <td><div className='ml-3'>{i?.user?.fullName}</div></td>
+                                <td><div className='ml-3'>{i?.user?.email}</div></td>
+                                <td><div className='ml-3'>{i?.class?.name}</div></td>
+                                <td><div className='ml-3'>{i?.requestDetails}</div></td>
+                                <td><div className='ml-3 text-center'>{func.convertDate(i?.createdAt)}</div></td>
                                 <td>
                                     <div className='flex items-center justify-around my-2'>
                                         <button className='main-btn' onClick={() => handleApprove(i.class?._id, i.user?._id, i.user?.role, i._id)}>Approve</button>
